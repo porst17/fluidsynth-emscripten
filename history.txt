@@ -1,0 +1,214 @@
+    1  cd libsndfile/
+    2  cd build/
+    3  ls
+    4  emcmake cmake ..
+    5  emmake make
+    6  ls
+    7  ls /emsdk/upstream/emscripten/cmake/Modules/
+    8  ls /emsdk/upstream/emscripten/cmake/Modules
+    9  ll
+   10  ls -l
+   11  rm -r *
+   12  cd ..
+   13  cd ..
+   14  cd vorbis/
+   15  ls
+   16  emcmake cmake -LAH ..
+   17  mkdir build
+   18  cd build/
+   19  emcmake cmake -LAH ..
+   20  cd ..
+   21  cd ..
+   22  cd ogg/build
+   23  emcmake cmake -LAH ..
+   24  emmake make
+   25  emmake make install
+   26  cd ..
+   27  cd ..
+   28  cd vorbis/build/
+   29  ls
+   30  rm *
+   31  rm -r *
+   32  emcmake cmake -LAH ..
+   33  emmake make
+   34  emmake make install
+   35  cd ..
+   36  cd ..
+   37  cd libsndfile/
+   38  cd build/
+   39  rm -r *
+   40  emcmake cmake -LAH ..
+   41  rm -r *
+   42  emcmake cmake -DBUILD_PROGRAMS=off ..
+   43  rm CMakeCache.txt 
+   44  emcmake cmake -DBUILD_PROGRAMS=off -DBUILD_TESTING=off ..
+   45  rm CMakeCache.txt 
+   46  emcmake cmake -DBUILD_PROGRAMS=off -DBUILD_TESTING=off -DBUILD_EXAMPLES=off ..
+   47  cd ..
+   48  cd ..
+   49  cd opus/
+   50  cd build
+   51  emcmake cmake -LAH ..
+   52  ls ..
+   53  emcmake cmake -LAH ..
+   54  emmake make
+   55  emmake make install
+   56  cd ..
+   57  cd ..
+   58  cd flac
+   59  mkdir build
+   60  mkdir cmake-build
+   61  cd cmake-build/
+   62  emcmake cmake -LAH ..
+   63  emmake make
+   64  rm CMakeCache.txt 
+   65  emcmake cmake -LAH -isystem /emsdk/upstream/lib/clang/15.0.0/include/ ..
+   66  rm CMakeCache.txt 
+   67  emcmake cmake -LAH -DBUILD_CXXLIBS=off -DBUILD_PROGRAMS=off -DBUILD_EXAMPLES=off -DBUILD_TESTING=off -DBUILD_DOCS ..
+   68  emcmake cmake -LAH -DBUILD_CXXLIBS=off -DBUILD_PROGRAMS=off -DBUILD_EXAMPLES=off -DBUILD_TESTING=off -DBUILD_DOCS=off ..
+   69  emmake make
+   70  emmake make install
+   71  nano ../CMakeLists.txt 
+   72  rm CMakeCache.txt 
+   73  emcmake cmake -LAH -DBUILD_CXXLIBS=off -DBUILD_PROGRAMS=off -DBUILD_EXAMPLES=off -DBUILD_TESTING=off -DBUILD_DOCS=off ..
+   74  emmake make
+   75  emmake make install
+   76  cd ..
+   77  cd ..
+   78  cd libsndfile/build/
+   79  rm CMakeCache.txt 
+   80  history
+   81  emcmake cmake -DBUILD_PROGRAMS=off -DBUILD_TESTING=off -DBUILD_EXAMPLES=off ..
+   82  emmake make
+   83  emmake make install
+   84  cd ..
+   85  cd 
+   86  cd ..
+   87  ls
+   88  cd src
+   89  cd fluidsynth-emscripten/
+   90  cd build/
+   91  history
+   92  ls
+   93  rm CMakeCache.txt 
+   94  emcmake cmake ..
+   95  emmake make
+   96  rm *
+   97  rm -r *
+   98  emcmake cmake -Denable-oss=off -Denable-ipv6 -Denable-libsndfile=on ..
+   99  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on ..
+  100  cd ..
+  101  cd ..
+  102  cd libsndfile/
+  103  cd build/
+  104  emmake make install
+  105  cd ../../fluidsynth-emscripten/
+  106  cd build/
+  107  rm CMakeCache.txt 
+  108  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on ..
+  109  rm CMakeCache.txt 
+  110  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on ..
+  111  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on ..
+  112  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-pkgconfig=off ..
+  113  rm CMakeCache.txt 
+  114  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-pkgconfig=off ..
+  115  find /emsdk/upstream/ | grep cmake
+  116  rm CMakeCache.txt 
+  117  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-pkgconfig=off ..
+  118  rm CMakeCache.txt 
+  119  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-pkgconfig=off ..
+  120  rm CMakeCache.txt 
+  121  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  122  emmake make
+  123  cat /emsdk/upstream/emscripten/cache/sysroot/lib/cmake/SndFile/SndFileTargets.cmake
+  124  cat /emsdk/upstream/emscripten/cache/sysroot/lib/cmake/SndFile/SndFileConfig.cmake 
+  125  rm CMakeCache.txt 
+  126  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off -v  ..
+  127  emmake make VERBOSE=1
+  128  rm CMakeCache.txt 
+  129  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off -v  ..
+  130  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  131  emmake make VERBOSE=1
+  132  rm CMakeCache.txt 
+  133  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  134  emmake make VERBOSE=1
+  135  rm CMakeCache.txt 
+  136  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  137  emmake make VERBOSE=1
+  138  cd ../../libsndfile/build/
+  139  emmake make install
+  140  cd ../../fluidsynth-emscripten/build/
+  141  rm CMakeCache.txt 
+  142  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  143  emmake make VERBOSE=1
+  144  ls /emsdk/upstream/emscripten/cache/sysroot/lib/
+  145  find /emsdk/upstream/emscripten/cache/sysroot/lib/
+  146  rm CMakeCache.txt 
+  147  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  148  emmake make VERBOSE=1
+  149  cd ../../flac/cmake-build/
+  150  history
+  151  rm -r *
+  152  CFLAGS="${CFLAGS -fno-stack-protector -U_FORTIFY_SOURCE}" CXXFLAGS="${CXXFLAGS -fno-stack-protector -U_FORTIFY_SOURCE}" emcmake cmake -LAH -DBUILD_CXXLIBS=off -DBUILD_PROGRAMS=off -DBUILD_EXAMPLES=off -DBUILD_TESTING=off -DBUILD_DOCS=off ..
+  153  CFLAGS="${CFLAGS} -fno-stack-protector -U_FORTIFY_SOURCE" CXXFLAGS="${CXXFLAGS} -fno-stack-protector -U_FORTIFY_SOURCE" emcmake cmake -LAH -DBUILD_CXXLIBS=off -DBUILD_PROGRAMS=off -DBUILD_EXAMPLES=off -DBUILD_TESTING=off -DBUILD_DOCS=off ..
+  154  emmake make VERBOSE=1
+  155  emmake make VERBOSE=1 install
+  156  cd ../../fluidsynth-emscripten/build/
+  157  rm CMakeCache.txt 
+  158  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  159  emmake make VERBOSE=1
+  160  cd ../../flac/cmake-build/
+  161  rm -r *
+  162  CFLAGS="${CFLAGS} -fno-stack-protector -U_FORTIFY_SOURCE" CXXFLAGS="${CXXFLAGS} -fno-stack-protector -U_FORTIFY_SOURCE" emcmake cmake -LAH -DBUILD_CXXLIBS=off -DBUILD_PROGRAMS=off -DBUILD_EXAMPLES=off -DBUILD_TESTING=off -DBUILD_DOCS=off -DWITH_STACK_PROTECTOR=off ..
+  163  rm -r *
+  164  CFLAGS="${CFLAGS} -fno-stack-protector -U_FORTIFY_SOURCE" CXXFLAGS="${CXXFLAGS} -fno-stack-protector -U_FORTIFY_SOURCE" emcmake cmake -LAH -DBUILD_CXXLIBS=off -DBUILD_PROGRAMS=off -DBUILD_EXAMPLES=off -DBUILD_TESTING=off -DBUILD_DOCS=off -DWITH_STACK_PROTECTOR=off -DWITH_FORTIFY_SOURCE=off ..
+  165  emmake make VERBOSE=1 install
+  166  cd ../../fluidsynth-emscripten/build/
+  167  emmake make VERBOSE=1
+  168  rm CMakeCache.txt 
+  169  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  170  emmake make VERBOSE=1
+  171  cd ../../opus/build/
+  172  history
+  173  rm -r *
+  174  emcmake cmake -DOPUS_STACK_PROTECTOR=off ..
+  175  emmake make install
+  176  cd ../../fluidsynth-emscripten/build/
+  177  emmake make VERBOSE=1
+  178  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  179  emmake make VERBOSE=1
+  180  ls src
+  181  ls -h src
+  182  ls -lh src
+  183  rm -r *
+  184  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  185  emmake make
+  186  emmake make
+  187  emmake make
+  188  emmake make VERBOSE=1
+  189  emmake make VERBOSE=1
+  190  emmake make VERBOSE=1
+  191  rm -r *
+  192  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  193  emmake make
+  194  ls
+  195  ls
+  196* ls src/CMakeFiles/libfluidsynth-OBJ.dir/sfloader/fluid_
+  197  rm CMakeCache.txt 
+  198  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off ..
+  199  emmake make
+  200  rm src/CMakeFiles/libfluidsynth-OBJ.dir/sfloader/fluid_sffile.c.o 
+  201  emmake make
+  202  emmake make
+  203  emmake make
+  204  less
+  205  cat ../src/sfloader/fluid_sffile.c
+  206  cat ../src/sfloader/fluid_sffile.c | grep "3.x" 
+  207  cat ../src/sfloader/fluid_sffile.c | grep -C 10 "3.x" 
+  208  emmake make
+  209  rm -r *
+  210  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off .. && emmake make 
+  211  emcmake cmake -Denable-oss=off -Denable-ipv6=off -Denable-libsndfile=on -Denable-aufile=off .. && emmake make 
+  212* 
+  213  emmake make
+  214  history > ../history.txt

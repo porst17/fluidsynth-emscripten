@@ -1,3 +1,4 @@
+See `history.txt` for the commands I used to build `libsndfile` and its dependencies via https://hub.docker.com/r/emscripten/emsdk
 
 # FluidSynth with Emscripten-specific patch
 
