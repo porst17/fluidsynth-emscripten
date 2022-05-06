@@ -678,17 +678,7 @@ static int process_info(SFData *sf, int size)
                 return FALSE;
             }
 
-            if(sf->version.major == 3)
-            {
-#if !LIBSNDFILE_SUPPORT
-                FLUID_LOG(FLUID_WARN,
-                          "Sound font version is %d.%d but fluidsynth was compiled without"
-                          " support for (v3.x)",
-                          sf->version.major, sf->version.minor);
-                return FALSE;
-#endif
-            }
-            else if(sf->version.major > 2)
+            if(sf->version.major > 3)
             {
                 FLUID_LOG(FLUID_WARN,
                           "Sound font version is %d.%d which is newer than"
@@ -2520,8 +2510,84 @@ error_exit:
     return -1;
 }
 #else
+
+
+#define STB_VORBIS_NO_STDIO
+#define STB_VORBIS_NO_PUSHDATA_API
+#include "stb_vorbis.c"
+
 static int fluid_sffile_read_vorbis(SFData *sf, unsigned int start_byte, unsigned int end_byte, short **data)
 {
-    return -1;
+  unsigned int vorbis_data_length;
+  unsigned char *vorbis_data;
+  short *wav_data = NULL;
+
+  if((start_byte > sf->samplesize) || (end_byte > sf->samplesize))
+  {
+      FLUID_LOG(FLUID_ERR, "Ogg Vorbis data offsets exceed sample data chunk");
+      return -1;
+  }
+  
+  vorbis_data_length = (end_byte + 1) - start_byte;
+  vorbis_data = FLUID_ARRAY(unsigned char, vorbis_data_length);
+  if(!vorbis_data)
+  {
+      FLUID_LOG(FLUID_ERR, "Out of memory");
+      FLUID_FREE(vorbis_data);
+      return -1;
+  }
+
+  fluid_rec_mutex_lock(sf->mtx);  
+  if (sf->fcbs->fseek(sf->sffd, sf->samplepos + start_byte, SEEK_SET) == FLUID_FAILED)
+  {
+      FLUID_LOG(FLUID_ERR, "Failed to seek to compressed sample position");
+      return -1;
+  }
+  else
+  {
+      if (sf->fcbs->fread(vorbis_data, vorbis_data_length, sf->sffd) == FLUID_FAILED)
+      {
+          FLUID_LOG(FLUID_ERR, "Failed to read compressed sample data");
+          return -1;
+      }
+  }
+  fluid_rec_mutex_unlock(sf->mtx);
+  
+  int channels, sample_rate;
+  short *wav_stb_output;
+
+  int samples = stb_vorbis_decode_memory(vorbis_data, vorbis_data_length, &channels, &sample_rate, &wav_stb_output);
+  FLUID_LOG(FLUID_WARN, "channels: %d, samples: %d, sample rate: %d, input size: %d", channels, samples, sample_rate, vorbis_data_length);
+  
+  FLUID_FREE(vorbis_data);
+  
+  // Empty sample
+  if(channels <= 0 || samples <= 0)
+  {
+      FLUID_LOG(FLUID_DBG, "Empty decompressed sample");
+      *data = NULL;
+      return 0;
+  }
+  
+  wav_data = FLUID_ARRAY(short, samples * channels);
+
+  if(!wav_data)
+  {
+      FLUID_LOG(FLUID_ERR, "Out of memory");
+      return -1;
+  }
+  
+  FLUID_MEMCPY(wav_data, wav_stb_output, channels * sample_rate * sizeof(short));
+  free(wav_stb_output);
+
+  // Mono sample
+  if(channels != 1)
+  {
+      FLUID_LOG(FLUID_DBG, "Unsupported channel count %d in ogg sample", channels);
+  }
+
+  *data = wav_data;
+
+  return samples;
 }
 #endif
